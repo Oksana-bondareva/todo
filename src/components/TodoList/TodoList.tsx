@@ -1,17 +1,7 @@
 import { List } from '@mui/material';
 import React from 'react';
 import TodoItem from '../TodoItem/TodoItem';
-
-interface Todo {
-    text: string;
-    completed: boolean;
-}
-
-interface TodoListProps {
-    todos: Todo[];
-    toggleTodo: (index: number) => void;
-    deleteTodo: (index: number) => void;
-}
+import { TodoListProps } from '../../types/types';
 
 const TodoList: React.FC<TodoListProps> = ({ todos, toggleTodo, deleteTodo }) => (
     <List>
