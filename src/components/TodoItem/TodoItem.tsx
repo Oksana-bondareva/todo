@@ -14,7 +14,9 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, index, toggleTodo, deleteTodo
                 checked={todo.completed}
                 onClick={() => toggleTodo(index)}
             />
-            <ListItemText primary={todo.value} style={textStyle} />
+            <ListItemText
+                primary={<span style={textStyle}>{todo.value}</span>}
+            />
             <Box>
                 <IconButton
                     aria-label="Delete"
