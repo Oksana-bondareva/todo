@@ -5,6 +5,7 @@ import TodoForm from './components/TodoForm/TodoForm';
 import TodoList from './components/TodoList/TodoList';
 import TodoFilter from './components/TodoFilter/TodoFilter';
 import { Todo } from './types/types';
+import { Box, Typography } from '@mui/material';
 
 function App() {
     const [todos, setTodos] = useState<Todo[]>([]);
@@ -39,12 +40,19 @@ function App() {
         return true;
     });
 
+    const remainingTodosCount = todos.filter(todo => !todo.completed).length;
+
     return (
         <>
             <Header />
             <TodoForm addTodo={addTodo} />
             <TodoList todos={filteredTodos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
-            <TodoFilter setFilter={setFilter} hasTodos={hasTodos} clearTodos={clearTodos} />
+            <Box display="flex" justifyContent="space-between" alignItems="center" my={2}>
+                <Typography px={2}>
+                    {remainingTodosCount} items left
+                </Typography>
+                <TodoFilter setFilter={setFilter} hasTodos={hasTodos} clearTodos={clearTodos} />
+            </Box>
         </>
     )
 }

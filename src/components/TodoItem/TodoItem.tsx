@@ -4,7 +4,11 @@ import { ListItem, Checkbox, ListItemText, IconButton, Box } from '@mui/material
 import { TodoItemProps } from '../../types/types';
 
 const TodoItem: React.FC<TodoItemProps> = ({ todo, index, toggleTodo, deleteTodo }) => {
-    const textStyle = todo.completed ? { textDecoration: 'line-through', opacity: 0.5 } : {};
+    const textStyle = {
+        textDecoration: todo.completed ? 'line-through' : 'none',
+        opacity: todo.completed ? 0.5 : 1,
+        fontSize: '1.6em',
+    };
 
     return (
         <ListItem key={index.toString()} onClick={() => toggleTodo(index)}>
