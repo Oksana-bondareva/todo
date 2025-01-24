@@ -69,4 +69,28 @@ describe('TodoApp', () => {
     expect(screen.getByText('New Todo')).toBeInTheDocument();
     expect(screen.queryByText('Completed Todo')).not.toBeInTheDocument();
   });
+
+  test('counts remaining uncompleted todos', () => {
+    render(<App />);
+
+    const input = screen.getByPlaceholderText('Add new todo');
+    const button = screen.getByText('Add');
+
+    fireEvent.change(input, { target: { value: 'First Todo' } });
+    fireEvent.click(button);
+
+    fireEvent.change(input, { target: { value: 'Second Todo' } });
+    fireEvent.click(button);
+
+    expect(screen.getByText('2 items left')).toBeInTheDocument();
+
+    const checkboxes = screen.getAllByRole('checkbox');
+    fireEvent.click(checkboxes[0]);
+
+    expect(screen.getByText('1 items left')).toBeInTheDocument();
+
+    fireEvent.click(checkboxes[1]);
+
+    expect(screen.getByText('0 items left')).toBeInTheDocument();
+  });
 });
